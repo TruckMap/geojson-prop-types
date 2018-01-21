@@ -1,4 +1,5 @@
 var geojsonhint = require('geojsonhint');
+var ucfirst = require('ucfirst');
 
 var types = [
   'Point',
@@ -27,7 +28,7 @@ function createValidator(type) {
     var messages = ['Invalid GeoJSON for ' + componentName];
 
     errors.forEach(function(error) {
-      messages.push(error.message);
+      messages.push(ucfirst(error.message));
     });
 
     return new Error(messages.join('. ') + '.');
@@ -38,6 +39,6 @@ var GeoPropTypes = {};
 
 types.forEach(function(type){
   GeoPropTypes[type] = createValidator(type);
-})
+});
 
 module.exports = GeoPropTypes;
