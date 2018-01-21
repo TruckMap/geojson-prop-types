@@ -1,0 +1,23 @@
+{
+  "name": "geojson-prop-types",
+  "version": "0.0.1",
+  "description": "GeoJSON Prop Types for React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eric Kerr",
+  "license": "ISC",
+  "keywords": [
+    "react",
+    "prop-types",
+    "GeoJSON"
+  ],
+  "repository": "EricPKerr/geojson-prop-types",
+  "peerDependencies": {
+    "prop-types": "^15.6.0"
+  },
+  "dependencies": {
+    "geojsonhint": "^2.0.0"
+  }
+}
