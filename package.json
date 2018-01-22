@@ -14,9 +14,6 @@
     "GeoJSON"
   ],
   "repository": "EricPKerr/geojson-prop-types",
-  "peerDependencies": {
-    "prop-types": "^15.6.0"
-  },
   "dependencies": {
     "geojsonhint": "^2.0.0",
     "ucfirst": "^1.0.0"
