@@ -24,7 +24,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-# API
+# Supported Types
 
 ```
 GeoPropTypes.Point
