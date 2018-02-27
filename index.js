@@ -15,11 +15,14 @@ var types = [
 
 function createValidator(type) {
   function validate(isRequired, props, propName, componentName) {
-    if(!props.hasOwnProperty(propName)) {
-      return isRequired ? new Error('GeoJSON for `' + type + '` on ' + componentName + ' is Required.') : null;
-    }
-    
     var value = props[propName];
+
+    if(!value || !(value instanceof Object)){
+      if(isRequired) {
+        return new Error('GeoJSON for `' + type + '` on ' + componentName + ' is Required.');
+      }
+      return null;
+    }
 
     if(!value.type || type !== value.type) {
       return new Error('Invalid GeoJSON type for ' + componentName + '. Expected ' + type + '.');
@@ -33,11 +36,15 @@ function createValidator(type) {
       messages = ['Invalid GeoJSON for ' + componentName];
 
       errors.forEach(function(error) {
-        messages.push(ucfirst(error));
+        messages.push(ucfirst(error) + '.');
       });
     });
 
-    return new Error(messages.join('. ') + '.');
+    if(messages.length === 0) {
+      return null;
+    }
+
+    return new Error(messages.join(' '));
   }
 
   var chainedValidator = validate.bind(null, false);
@@ -52,4 +59,4 @@ types.forEach(function(type){
   GeoPropTypes[type] = createValidator(type);
 });
 
-exports.default = GeoPropTypes;
+module.exports = GeoPropTypes;
