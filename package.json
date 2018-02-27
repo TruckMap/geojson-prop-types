@@ -2,7 +2,7 @@
   "name": "geojson-prop-types",
   "version": "0.2.0",
   "description": "GeoJSON Prop Types for React",
-  "main": "index.js",
+  "main": "lib/GeoPropTypes.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
