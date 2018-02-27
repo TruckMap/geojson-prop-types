@@ -1,6 +1,10 @@
 # GeoJSON Prop Types
 
-A PropTypes library to validate GeoJSON objects.
+A PropTypes library to validate GeoJSON objects for React.
+
+Links:
+- [GeoJSON.org](http://geojson.org)
+- [IETF RFC 7946 - Spec](https://tools.ietf.org/html/rfc7946)
 
 # Installation
 
