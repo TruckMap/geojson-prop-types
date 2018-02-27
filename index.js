@@ -15,9 +15,11 @@ var types = [
 
 function createValidator(type) {
   return function(props, propName, componentName) {
+    if(props.hasOwnProperty(propName)) {
+      return null;
+    }
+    
     var value = props[propName];
-
-    if(!value) return null;
 
     if(!value.type || type !== value.type) {
       return new Error('Invalid GeoJSON type for ' + componentName + '. Expected ' + type + '.');
