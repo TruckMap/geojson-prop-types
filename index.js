@@ -1,4 +1,4 @@
-var geojsonhint = require('geojsonhint');
+var GJV = require('geojson-validation');
 var ucfirst = require('ucfirst');
 
 var types = [
@@ -25,14 +25,16 @@ function createValidator(type) {
       return new Error('Invalid GeoJSON type for ' + componentName + '. Expected ' + type + '.');
     }
 
-    var errors = geojsonhint.hint(value, {
-      precisionWarning: false
-    });
+    var messages = [];
 
-    var messages = ['Invalid GeoJSON for ' + componentName];
+    GJV.valid(value, function(isValid, errors){
+      if(isValid) return;
 
-    errors.forEach(function(error) {
-      messages.push(ucfirst(error.message));
+      messages = ['Invalid GeoJSON for ' + componentName];
+
+      errors.forEach(function(error) {
+        messages.push(ucfirst(error));
+      });
     });
 
     return new Error(messages.join('. ') + '.');
@@ -46,3 +48,4 @@ types.forEach(function(type){
 });
 
 module.exports = GeoPropTypes;
+module.exports.default = GeoPropTypes;
