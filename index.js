@@ -14,9 +14,9 @@ var types = [
 ]
 
 function createValidator(type) {
-  return function(props, propName, componentName) {
-    if(props.hasOwnProperty(propName)) {
-      return null;
+  function validate(isRequired, props, propName, componentName) {
+    if(!props.hasOwnProperty(propName)) {
+      return isRequired ? new Error('GeoJSON for `' + type + '` on ' + componentName + ' is Required.') : null;
     }
     
     var value = props[propName];
@@ -39,6 +39,11 @@ function createValidator(type) {
 
     return new Error(messages.join('. ') + '.');
   }
+
+  var chainedValidator = validate.bind(null, false);
+  chainedValidator.isRequired = validate.bind(null, true);
+
+  return chainedValidator;
 }
 
 var GeoPropTypes = {};
@@ -47,5 +52,4 @@ types.forEach(function(type){
   GeoPropTypes[type] = createValidator(type);
 });
 
-module.exports = GeoPropTypes;
-module.exports.default = GeoPropTypes;
+exports.default = GeoPropTypes;
